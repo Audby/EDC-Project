@@ -121,7 +121,7 @@ print(cm_test)
 print(f"Error rate: {error_rate(y_test, pred_test) * 100:.1f}%")
 
 
-# last 30 for training, first 20 for testing
+# last 30 for training, first 20 for testing (task 1d)
 train_1d, test_1d = class_1[N_TEST:], class_1[:N_TEST]
 train_2d, test_2d = class_2[N_TEST:], class_2[:N_TEST]
 train_3d, test_3d = class_3[N_TEST:], class_3[:N_TEST]
