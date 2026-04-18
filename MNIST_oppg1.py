@@ -1,6 +1,7 @@
 import time
 import numpy as np
 from scipy.io import loadmat
+import matplotlib.pyplot as plt
 
 
 def sq_euclid_dist(x, z):
@@ -66,3 +67,33 @@ err = error_rate(y_test, y_pred)
 print("\nConfusion matrix (rows = true class, columns = predictions):")
 print(cm)
 print(f"\nError rate: {err * 100:.2f}% ({int(err * len(y_test))} of {len(y_test)} errors)")
+
+# --- Task 1b: Misclassified images ---
+
+misclassified_idx = np.where(y_test != y_pred)[0]
+selected = misclassified_idx[:10]
+
+fig1, axes1 = plt.subplots(2, 5, figsize=(12, 5))
+fig1.suptitle("Misclassified Images")
+for ax, idx in zip(axes1.ravel(), selected):
+    img = X_test[idx].reshape(28, 28)
+    ax.imshow(img, cmap='gray')
+    ax.set_title(f"True: {y_test[idx]}, Pred: {y_pred[idx]}")
+    ax.axis('off')
+fig1.tight_layout()
+
+# --- Task 1c: Correctly classified images ---
+
+correct_idx = np.where(y_test == y_pred)[0]
+selected_correct = correct_idx[:10]
+
+fig2, axes2 = plt.subplots(2, 5, figsize=(12, 5))
+fig2.suptitle("Correctly Classified Images")
+for ax, idx in zip(axes2.ravel(), selected_correct):
+    img = X_test[idx].reshape(28, 28)
+    ax.imshow(img, cmap='gray')
+    ax.set_title(f"True: {y_test[idx]}, Pred: {y_pred[idx]}")
+    ax.axis('off')
+fig2.tight_layout()
+
+plt.show()
